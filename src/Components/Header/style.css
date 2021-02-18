@@ -1,0 +1,12 @@
+.App-header {
+  width: 90%;
+  margin: auto;
+  padding: 34px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.logo {
+  margin-left: 45%;
+  font-family: sans-serif;
+}
