@@ -9,24 +9,25 @@
 .radio__label {
   display: block;
   position: relative;
-
+  padding: 8px 14px;
+  line-height: 0.5rem;
+  letter-spacing: 1px;
   font-size: 1rem;
   cursor: pointer;
-  color: gray;
-  transition: all ease-in-out;
+  color: #6e7191;
 }
 .radio__input:checked + .radio__label {
-  color: black;
+  color: #14142b;
   font-weight: bold;
 }
-.radio__input:checked + .radio__label::after {
+.radio__input:checked + .radio__label::before {
   display: block;
   content: "";
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   position: absolute;
   top: 150%;
-  left: 40%;
+  left: 45%;
   border-radius: 50%;
-  background: black;
+  background: #14142b;
 }

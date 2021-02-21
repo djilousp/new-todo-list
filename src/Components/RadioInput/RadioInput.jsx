@@ -1,14 +1,15 @@
 import React from "react";
 import "./style.css";
-function RadioInput() {
+const RadioInput = ({ setFilter }) => {
   return (
-    <div className="radio">
+    <div className="radio" onChange={(e) => setFilter(e.target.value)}>
       <input
         className="radio__input"
         type="radio"
         name="filter"
         value="all"
         id="all"
+        defaultChecked
       />
       <label className="radio__label" htmlFor="all">
         All
@@ -21,20 +22,20 @@ function RadioInput() {
         id="complete"
       />
       <label className="radio__label" htmlFor="complete">
-        Complete
+        Completed
       </label>
       <input
         className="radio__input"
         type="radio"
         name="filter"
-        value="incomplete"
+        value="uncomplete"
         id="incomplete"
       />
       <label className="radio__label" htmlFor="incomplete">
-        Incomplete
+        Uncomplete
       </label>
     </div>
   );
-}
+};
 
 export default RadioInput;

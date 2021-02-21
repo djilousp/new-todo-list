@@ -1,25 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import Todo from "../Todo";
-import { DataGrid } from "@material-ui/data-grid";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import RadioInput from "../RadioInput/RadioInput";
+import RadioInput from "../RadioInput/";
+import TodoList from "../TodoList";
+import data from "../../data";
 
 const useStyles = makeStyles(() => ({
   mainContainer: {
     width: "90%",
-
+    maxHeight: "80vh",
     margin: "auto",
     background: "white",
     borderRadius: 24,
     boxShadow: "0px 32px 64px rgba(17, 17, 17, 0.08);",
     padding: 50,
+    overflow: "hidden",
   },
   button: {
     borderRadius: 20,
@@ -31,6 +28,41 @@ const useStyles = makeStyles(() => ({
 }));
 export default function Main() {
   const classes = useStyles();
+  const [todos, setTodos] = useState([]);
+  const [filter, setFilter] = useState("all");
+  const [filteredTodos, setFilteredTodos] = useState([]);
+  const handleCompleteTodos = (key) => {
+    const todosUpdated = todos.map((todo) => {
+      if (todo.id === key) {
+        return { ...todo, completed: !todo.completed };
+      }
+      return todo;
+    });
+    setTodos(todosUpdated);
+  };
+  const handleDeleteTodos = (key) => {
+    const todosUpdated = todos.filter((todo) => todo.id !== key);
+    setTodos(todosUpdated);
+  };
+  const handleFiltering = (filter) => {
+    switch (filter) {
+      case "completed":
+        setFilteredTodos(todos.filter((todo) => todo.completed === true));
+        break;
+      case "uncompleted":
+        setFilteredTodos(todos.filter((todo) => todo.completed === false));
+        break;
+      default:
+        setFilteredTodos(todos);
+    }
+  };
+  useEffect(() => {
+    setTodos(data);
+    setFilteredTodos(data);
+  }, []);
+  useEffect(() => {
+    handleFiltering(filter);
+  }, [filter]);
   // create portal to handle creating to-dos
   return (
     <>
@@ -52,12 +84,17 @@ export default function Main() {
         </Grid>
         <Grid item container justify="space-between" xs={12}>
           <Grid item xs={4}>
-            <RadioInput />
+            <RadioInput setFilter={setFilter} />
           </Grid>
         </Grid>
         <Grid item container justify="space-between" xs={12}>
-          <Todo />
+          <TodoList
+            todos={filteredTodos}
+            handleCompleteTodos={handleCompleteTodos}
+            handleDeleteTodos={handleDeleteTodos}
+          />
         </Grid>
+        <Grid item container justify="space-between" xs={12}></Grid>
       </Grid>
     </>
   );
