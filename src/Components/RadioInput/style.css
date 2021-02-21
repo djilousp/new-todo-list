@@ -1,0 +1,32 @@
+.radio {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-around;
+}
+.radio__input {
+  display: none;
+}
+.radio__label {
+  display: block;
+  position: relative;
+
+  font-size: 1rem;
+  cursor: pointer;
+  color: gray;
+  transition: all ease-in-out;
+}
+.radio__input:checked + .radio__label {
+  color: black;
+  font-weight: bold;
+}
+.radio__input:checked + .radio__label::after {
+  display: block;
+  content: "";
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 150%;
+  left: 40%;
+  border-radius: 50%;
+  background: black;
+}
