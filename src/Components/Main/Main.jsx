@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
 export default function Main() {
   const classes = useStyles();
   const [todos, setTodos] = useState([]);
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("");
   const [filteredTodos, setFilteredTodos] = useState([]);
   const handleCompleteTodos = (key) => {
     const todosUpdated = todos.map((todo) => {
@@ -44,25 +44,24 @@ export default function Main() {
     const todosUpdated = todos.filter((todo) => todo.id !== key);
     setTodos(todosUpdated);
   };
-  const handleFiltering = (filter) => {
+
+  useEffect(() => {
+    if (todos.length === 0) {
+      setTodos(data);
+    }
     switch (filter) {
       case "completed":
         setFilteredTodos(todos.filter((todo) => todo.completed === true));
         break;
-      case "uncompleted":
+      case "uncomplete":
         setFilteredTodos(todos.filter((todo) => todo.completed === false));
         break;
       default:
         setFilteredTodos(todos);
     }
-  };
-  useEffect(() => {
-    setTodos(data);
-    setFilteredTodos(data);
-  }, []);
-  useEffect(() => {
-    handleFiltering(filter);
-  }, [filter]);
+    console.log("second useffect worked");
+  }, [todos, filter]);
+
   // create portal to handle creating to-dos
   return (
     <>
@@ -89,7 +88,7 @@ export default function Main() {
         </Grid>
         <Grid item container justify="space-between" xs={12}>
           <TodoList
-            todos={filteredTodos}
+            filteredTodos={filteredTodos}
             handleCompleteTodos={handleCompleteTodos}
             handleDeleteTodos={handleDeleteTodos}
           />

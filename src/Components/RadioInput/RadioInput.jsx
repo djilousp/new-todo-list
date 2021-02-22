@@ -18,10 +18,10 @@ const RadioInput = ({ setFilter }) => {
         className="radio__input"
         type="radio"
         name="filter"
-        value="complete"
-        id="complete"
+        value="completed"
+        id="completed"
       />
-      <label className="radio__label" htmlFor="complete">
+      <label className="radio__label" htmlFor="completed">
         Completed
       </label>
       <input
@@ -29,9 +29,9 @@ const RadioInput = ({ setFilter }) => {
         type="radio"
         name="filter"
         value="uncomplete"
-        id="incomplete"
+        id="uncomplete"
       />
-      <label className="radio__label" htmlFor="incomplete">
+      <label className="radio__label" htmlFor="uncomplete">
         Uncomplete
       </label>
     </div>

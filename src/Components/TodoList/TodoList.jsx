@@ -3,14 +3,20 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import Todo from "../Todo/Todo";
 
-const TodoList = ({ todos, handleCompleteTodos, handleDeleteTodos }) => {
+const TodoList = ({
+  todos,
+  filteredTodos,
+  handleCompleteTodos,
+  handleDeleteTodos,
+}) => {
   return (
     <Table>
       <TableBody>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <Todo
             key={todo.id}
             todo={todo}
+            todos={todos}
             handleCompleteTodos={handleCompleteTodos}
             handleDeleteTodos={handleDeleteTodos}
           />

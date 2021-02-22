@@ -23,7 +23,10 @@ const useStyles = makeStyles(() => ({
 }));
 const Todo = ({ todo, handleCompleteTodos, handleDeleteTodos }) => {
   const completeTodo = (id) => handleCompleteTodos(id);
-  const deleteTodo = (id) => handleDeleteTodos(id);
+  const deleteTodo = (e, id) => {
+    e.stopPropagation();
+    handleDeleteTodos(id);
+  };
   const classes = useStyles();
   return (
     <TableRow
@@ -32,7 +35,7 @@ const Todo = ({ todo, handleCompleteTodos, handleDeleteTodos }) => {
       selected={todo.completed}
       className={classes.tableRow}
       key={todo.id}
-      //onClick={() => completeTodo(todo.id)}
+      onClick={() => completeTodo(todo.id)}
     >
       <TableCell
         style={{
@@ -45,7 +48,7 @@ const Todo = ({ todo, handleCompleteTodos, handleDeleteTodos }) => {
       >
         <Checkbox
           checked={todo.completed}
-          onClick={() => completeTodo(todo.id)}
+          //onClick={(e) => completeTodo(e, todo.id)}
           inputProps={{ "aria-label": "primary checkbox" }}
         />
         <Avatar aria-label="avatar" src="" />
@@ -59,7 +62,7 @@ const Todo = ({ todo, handleCompleteTodos, handleDeleteTodos }) => {
         </p>
         <IconButton children={<CreateIcon color="primary" />} />
         <IconButton
-          onClick={() => deleteTodo(todo.id)}
+          onClick={(e) => deleteTodo(e, todo.id)}
           children={<DeleteIcon color="secondary" />}
         />
       </TableCell>
