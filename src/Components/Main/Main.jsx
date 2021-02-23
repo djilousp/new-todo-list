@@ -6,7 +6,9 @@ import Button from "@material-ui/core/Button";
 import RadioInput from "../RadioInput/";
 import TodoList from "../TodoList";
 import data from "../../data";
+import Modal from "react-modal";
 
+Modal.setAppElement("#root");
 const useStyles = makeStyles(() => ({
   mainContainer: {
     width: "90%",
@@ -31,6 +33,7 @@ export default function Main() {
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState("");
   const [filteredTodos, setFilteredTodos] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const handleCompleteTodos = (key) => {
     const todosUpdated = todos.map((todo) => {
       if (todo.id === key) {
@@ -76,6 +79,7 @@ export default function Main() {
               className={classes.button}
               variant="contained"
               color="primary"
+              onClick={() => setModalIsOpen(true)}
             >
               Add to-do
             </Button>
@@ -95,6 +99,29 @@ export default function Main() {
         </Grid>
         <Grid item container justify="space-between" xs={12}></Grid>
       </Grid>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        style={{
+          overlay: {
+            background: "rgba(20, 20, 43, 0.45)",
+          },
+          content: {
+            height: 591,
+            width: 855,
+            top: "calc(50% - 591px/2 + 34.5px)",
+            left: "calc(50% - 855px/2 - 0.5px)",
+            borderRadius: 24,
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "space-between",
+          },
+        }}
+      >
+        <h1>Model opened</h1>
+        <input type="file" name="image" id="image" />
+        <label htmlFor="image">Insert Image</label>
+      </Modal>
     </>
   );
 }
