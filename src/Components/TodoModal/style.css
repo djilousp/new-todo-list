@@ -1,0 +1,39 @@
+.to-do {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.to-do textarea {
+  width: 485;
+  height: 64;
+  padding-top: 22.5px;
+  padding-left: 30px;
+  background: #eff0f7;
+  border-radius: 16px;
+  outline: none;
+  border: none;
+  resize: none;
+  line-height: 1.5rem;
+}
+.upload-image {
+  position: relative;
+  width: 485px;
+  height: 234px;
+  display: flex;
+  background: #eff0f7;
+  box-sizing: border-box;
+  border-radius: 16px;
+  justify-content: center;
+  align-items: center;
+}
+.upload-image label:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+.upload-image .fa-times {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  cursor: pointer;
+}
