@@ -6,7 +6,13 @@ import { FaTimes } from "react-icons/fa";
 import "./style.css";
 
 Modal.setAppElement("#root");
-export default function TodoModal({ modalIsOpen, setModalIsOpen }) {
+export default function TodoModal({
+  modalIsOpen,
+  setModalIsOpen,
+  setInputText,
+  handleSubmitTodos,
+  inputText,
+}) {
   const handleUploadedImage = (e) => {
     if (e.target.files && e.target.files[0]) {
       let reader = new FileReader();
@@ -17,6 +23,16 @@ export default function TodoModal({ modalIsOpen, setModalIsOpen }) {
       };
       reader.readAsDataURL(e.target.files[0]);
     }
+  };
+  const handleInputText = (event) => {
+    const { value } = event.target;
+    setInputText(value);
+  };
+  const submitTodos = (e) => {
+    e.preventDefault();
+    setIsUploaded(false);
+    setModalIsOpen(false);
+    handleSubmitTodos();
   };
   const [image, setImage] = useState(undefined);
   const [isUploaded, setIsUploaded] = useState(false);
@@ -42,8 +58,21 @@ export default function TodoModal({ modalIsOpen, setModalIsOpen }) {
       }}
     >
       <h1>Create new To-Do</h1>
-      <div className="to-do">
-        <textarea placeholder="Name To-Do" />
+      <form id="to-do-form" onSubmit={submitTodos} className="to-do">
+        <textarea
+          value={inputText}
+          onChange={handleInputText}
+          name="inputText"
+          placeholder="Name To-Do"
+        />
+        <input
+          type="file"
+          name="image"
+          id="image"
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={(e) => handleUploadedImage(e)}
+        />
         <div
           className="upload-image"
           style={!isUploaded ? { border: "2px dashed #a0a3bd" } : {}}
@@ -51,14 +80,6 @@ export default function TodoModal({ modalIsOpen, setModalIsOpen }) {
           {!isUploaded ? (
             <label style={{ textAlign: "center" }} htmlFor="image">
               <UploadIcon style={{ display: "inline-block" }} size={24} />
-              <input
-                type="file"
-                name="image"
-                id="image"
-                accept="image/*"
-                style={{ display: "none" }}
-                onChange={(e) => handleUploadedImage(e)}
-              />
               <h5>Insert Image</h5>
             </label>
           ) : (
@@ -82,19 +103,20 @@ export default function TodoModal({ modalIsOpen, setModalIsOpen }) {
             </>
           )}
         </div>
-
         <Button
           style={{
             borderRadius: 20,
             width: "100%",
+            cursor: "pointer",
           }}
           variant="contained"
           color="primary"
           width="20%"
+          type="submit"
         >
           Create
         </Button>
-      </div>
+      </form>
     </Modal>
   );
 }

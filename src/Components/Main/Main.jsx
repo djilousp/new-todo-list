@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import RadioInput from "../RadioInput/";
 import TodoList from "../TodoList";
 import data from "../../data";
+import uniqid from "uniqid";
 import TodoModal from "../TodoModal/TodoModal";
 
 const useStyles = makeStyles(() => ({
@@ -29,6 +30,7 @@ const useStyles = makeStyles(() => ({
 }));
 export default function Main() {
   const classes = useStyles();
+  const [inputText, setInputText] = useState("");
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState("");
   const [filteredTodos, setFilteredTodos] = useState([]);
@@ -46,7 +48,13 @@ export default function Main() {
     const todosUpdated = todos.filter((todo) => todo.id !== key);
     setTodos(todosUpdated);
   };
-
+  const handleSubmitTodos = () => {
+    setTodos([
+      ...todos,
+      { content: inputText, completed: false, id: uniqid() },
+    ]);
+    setInputText("");
+  };
   useEffect(() => {
     if (todos.length === 0) {
       setTodos(data);
@@ -98,7 +106,13 @@ export default function Main() {
         </Grid>
         <Grid item container justify="space-between" xs={12}></Grid>
       </Grid>
-      <TodoModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
+      <TodoModal
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+        handleSubmitTodos={handleSubmitTodos}
+        setInputText={setInputText}
+        inputText={inputText}
+      />
     </>
   );
 }
