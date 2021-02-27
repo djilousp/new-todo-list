@@ -8,6 +8,7 @@ import TodoList from "../TodoList";
 import data from "../../data";
 import uniqid from "uniqid";
 import TodoModal from "../TodoModal/TodoModal";
+// start using Redux for state managment
 
 const useStyles = makeStyles(() => ({
   mainContainer: {
@@ -72,7 +73,6 @@ export default function Main() {
     console.log("second useffect worked");
   }, [todos, filter]);
 
-  // create portal to handle creating to-dos
   return (
     <>
       <CssBaseline />
