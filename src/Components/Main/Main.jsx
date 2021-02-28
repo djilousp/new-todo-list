@@ -104,7 +104,7 @@ export default function Main() {
             handleDeleteTodos={handleDeleteTodos}
           />
         </Grid>
-        <Grid item container justify="space-between" xs={12}></Grid>
+        <Grid item container alignItems="flex-end" xs={12}></Grid>
       </Grid>
       <TodoModal
         modalIsOpen={modalIsOpen}
