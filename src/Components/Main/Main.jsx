@@ -20,6 +20,7 @@ const useStyles = makeStyles(() => ({
     boxShadow: "0px 32px 64px rgba(17, 17, 17, 0.08);",
     padding: 50,
     overflow: "hidden",
+    position: "relative",
   },
   button: {
     borderRadius: 20,
@@ -104,7 +105,6 @@ export default function Main() {
             handleDeleteTodos={handleDeleteTodos}
           />
         </Grid>
-        <Grid item container alignItems="flex-end" xs={12}></Grid>
       </Grid>
       <TodoModal
         modalIsOpen={modalIsOpen}
