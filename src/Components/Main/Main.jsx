@@ -9,7 +9,7 @@ import data from "../../data";
 import uniqid from "uniqid";
 import TodoModal from "../TodoModal/TodoModal";
 // start using Redux for state managment
-
+// create BE in node after using Redux
 const useStyles = makeStyles(() => ({
   mainContainer: {
     width: "90%",
