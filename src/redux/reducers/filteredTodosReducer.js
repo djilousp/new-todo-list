@@ -1,4 +1,4 @@
-export const TodoListReducer = (state = initialState, action) => {
+export const filteredTodos = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TODO_ACTION":
       return [
@@ -6,10 +6,8 @@ export const TodoListReducer = (state = initialState, action) => {
         { id: uniq(), content: action.input, completed: false },
       ];
     case "UPDATE_TODO_ACTION":
-      return state.map((todo) => {
-        if (todo.id === action.payload.id)
-          return { ...todo, completed: !todo.completed };
-      });
+      return state.filter((todo) => todo.id !== action.payload.id);
+
     default:
       break;
   }
